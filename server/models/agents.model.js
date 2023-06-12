@@ -5,8 +5,8 @@ const sequelize = new Sequelize({
   storage: './database.sqlite3'
 });
 
-class Agent extends Sequelize.Model { }
-Agent.init(
+class Agents extends Sequelize.Model { }
+Agents.init(
   {
     // attributes
     id: {
@@ -42,12 +42,13 @@ Agent.init(
   },
   {
     sequelize,
-    modelName: 'Agents'
+    modelName: 'Agents',
+    tableName: 'agents',
     // options
   }
 );
 
 module.exports = {
   sequelize,
-  Agent
+  Agents
 };

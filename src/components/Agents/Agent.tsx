@@ -1,9 +1,19 @@
-import type { FC } from "react";
+import { useState, FC } from "react";
 import { IAgent } from "../../types/Agent";
 
 import './Agent.css'
+import axios from "axios";
+import AgentForm from "../agentForms/AgentForms";
 
 const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+ 
+
+  console.log(agent.photoUrl);
   return (
     <div className="container">
       <header>
@@ -23,7 +33,10 @@ const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
           </div>
         </div>
       </footer>
+
+     
     </div>
+   
   );
 };
 

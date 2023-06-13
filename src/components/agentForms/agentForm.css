@@ -1,33 +1,35 @@
 
 .form {
+  display: flex;
+  align-items: center;
   background-color: rgb(221, 240, 233);
-  border:1px solid black;
- 
-  
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 3rem;
 }
+
+.h2Title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
 .agent-form {
   display: flex;
-
-  flex-direction: line;
-  flex-wrap: wrap;
-  max-width: 100px;
-  margin: 0 auto;
-
-
- 
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
-.agent-form label {
-  margin-bottom: 10px;
-}
-
-.agent-form input,
+/* .agent-form input,
 .agent-form textarea {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-}
+} */
 
 .agent-form input[type="file"] {
   padding: 0;

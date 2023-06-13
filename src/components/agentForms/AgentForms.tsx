@@ -3,7 +3,8 @@ import axios from "axios";
 import * as M from "@mui/material";
 import "./agentForm.css";
 
-const AgentForm: FC = () => {
+const AgentForm: FC = (): JSX.Element => {
+  const [error, setError] = useState<boolean>(false);
   type Form = {
     firstName: string;
     lastName: string;
@@ -43,8 +44,41 @@ const AgentForm: FC = () => {
       }));
     }
   };
+  const checkName = () => {
+    if (agentData.firstName.trim().length <= 1) {
+      setError(true);
+      return alert("Enter a valid name");
+    }
+  };
+
+  const checklastName = () => {
+    if (agentData.lastName.trim().length <= 1) {
+      setError(true);
+      return alert("Enter a valid last name");
+    }
+  };
+  const checkArea = () => {
+    if (agentData.lastName.trim().length === 0) {
+      setError(true);
+      return alert("Enter a pratice area");
+    }
+  };
+
+  const checkAgentLicense = () => {
+    if (agentData.lastName.trim().length === 0) {
+      setError(true);
+      return alert("Enter a pratice area");
+    }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    checkName();
+    checklastName();
+    checkArea();
+    checkAgentLicense();
+    if (error) {
+      return "error";
+    }
     try {
       const response = await axios.post("/agents", agentData);
       console.log(response.data);
@@ -65,79 +99,61 @@ const AgentForm: FC = () => {
 
   return (
     <div className="form">
-      <form className="agent-form" onSubmit={handleSubmit}>        
-          <M.TextField
-            type="text"
-            name="firstName"
-            label="First Name:"
-            id="outlined-basic"
-            value={agentData.firstName}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-       
-          <M.TextField
-            type="text"
-            name="lastName"
-            id="outlined-basic"
-            label="Last Name:"
-            value={agentData.lastName}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-        
-          <M.TextField
-            type="text"
-            id="outlined-basic"
-            name="agentLicence"
-            label="Agent License:"
-            value={agentData.agentLicence}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-       
-          <M.TextField
-            type="text"
-            name="address"
-            label="Address:"
-            id="outlined-basic"
-            value={agentData.address}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-      
-          <M.TextField
-            type="text"
-            name="practiceAreas"
-            label="Practice Areas:"
-            id="outlined-basic"
-            value={agentData.practiceAreas}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-        
-          <M.TextField
-            name="aboutMe"
-            id="outlined-basic"
-            label="About Me:"
-            value={agentData.aboutMe}
-            onChange={handleInputChange}
-          />
-        
-        <br />
-        
-          <input
-            type="file"
-            name="photo"
-            accept="image/png, image/jpeg"
-
-
-            onChange={handleImageChange}          />
+      <h2 className="h2Title">Register Agent</h2>
+      <form className="agent-form" onSubmit={handleSubmit}>
+        <M.TextField
+          type="text"
+          name="firstName"
+          label="First Name:"
+          id="outlined-basic"
+          value={agentData.firstName}
+          onChange={handleInputChange}
+        />
+        <M.TextField
+          type="text"
+          name="lastName"
+          id="outlined-basic"
+          label="Last Name:"
+          value={agentData.lastName}
+          onChange={handleInputChange}
+        />
+        <M.TextField
+          type="text"
+          id="outlined-basic"
+          name="agentLicence"
+          label="Agent License:"
+          value={agentData.agentLicence}
+          onChange={handleInputChange}
+        />
+        <M.TextField
+          type="text"
+          name="address"
+          label="Address:"
+          id="outlined-basic"
+          value={agentData.address}
+          onChange={handleInputChange}
+        />
+        <M.TextField
+          type="text"
+          name="practiceAreas"
+          label="Practice Areas:"
+          id="outlined-basic"
+          value={agentData.practiceAreas}
+          onChange={handleInputChange}
+        />
+        <M.TextField
+          name="aboutMe"
+          id="outlined-basic"
+          label="About Me:"
+          value={agentData.aboutMe}
+          onChange={handleInputChange}
+        />
+        <input
+          type="file"
+          name="photo"
+          accept="image/png, image/jpeg"
+          onChange={handleImageChange}
+        />
         <br />
         <button className="button" type="submit">
           Submit

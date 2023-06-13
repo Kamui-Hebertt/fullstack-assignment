@@ -1,8 +1,8 @@
-import React from 'react'
+import './Footer.css';
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
   return (
-    <div>Created with love by Hebertt Nascimento.</div>
+    <div className='stat'>Created with love by Hebertt Nascimento.</div>
   )
 }
 

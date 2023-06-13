@@ -19,6 +19,7 @@ const Agents: FC = () => {
     fetchInitialData();
   }, []);
 
+  console.log(agents);
   return (
     <div className="agents">
       {agents.map((agent) => (

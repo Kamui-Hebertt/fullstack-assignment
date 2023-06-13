@@ -11,6 +11,8 @@ class AgentsController {
         address,
         practiceAreas,
         aboutMe,
+   
+     
       } = req.body;
   
       const agent = await Agents.create({
@@ -21,6 +23,8 @@ class AgentsController {
         address,
         practiceAreas,
         aboutMe,
+        
+        
       });
   
       res.status(201).json(agent);

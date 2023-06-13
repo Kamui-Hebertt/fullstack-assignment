@@ -1,0 +1,15 @@
+.containerHeader {
+  display: flex;
+  justify-content: space-between;
+  height: 3.5rem;
+  align-items: center;
+  padding-left: 4rem;
+  background-color: #53aaaa;
+}
+
+.cycle{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: orange;
+}

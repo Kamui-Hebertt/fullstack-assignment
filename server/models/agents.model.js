@@ -38,7 +38,8 @@ Agents.init(
     },
     aboutMe: {
       type: Sequelize.TEXT
-    }
+    }, 
+   
   },
   {
     sequelize,

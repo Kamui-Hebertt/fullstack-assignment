@@ -5,10 +5,11 @@ import Agent from "./Agent";
 import { IAgent } from "../../types/Agent";
 import axios from "axios";
 import './Agents.css'
-import AgentForm from "../agentForms/AgentForms";
+import AgentForm from "../AgentForms/AgentForms";
 
 const Agents: FC = () => {
   const [agents, setAgents] = useState<IAgent[]>([]);
+
 
   useEffect(() => {
     async function fetchInitialData() {
@@ -19,12 +20,12 @@ const Agents: FC = () => {
   }, []);
 
   return (
-    <><div className="agents">
+    <div className="agents">
       {agents.map((agent) => (
         <Agent key={agent.id} agent={agent} />
       ))}
 
-    </div><AgentForm /></>
+    </div>
   );
 };
 

@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FC, useContext } from "react";
+import * as M from "@mui/material";
+// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const FilterAgents = ({ agents, onFilter }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+import "./Search.css";
+import context from "../../context/context";
 
-  const handleSearch = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setSearchQuery(e.target.value);
-    onFilter(e.target.value);
+const FilterAgent: FC = (): JSX.Element => {
+  const { searchQuery, setSearchQuery } = useContext(context);
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchQuery(value);
   };
 
   return (
-    <div>
-      <label htmlFor="search">Search by Practice Areas:</label>
-      <input
+    <header className="header">
+      <M.TextField
         type="text"
-        id="search"
+        id="outlined-basic"
         value={searchQuery}
         onChange={handleSearch}
         placeholder="Enter practice areas"
+        label="Search by Practice Areas:"
       />
-    </div>
+      <Link to="/registerAgent">Register Agent</Link>
+    </header>
   );
 };
 
-export default FilterAgents;
+export default FilterAgent;

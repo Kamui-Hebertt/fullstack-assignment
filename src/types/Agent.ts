@@ -1,4 +1,5 @@
 export interface IAgent {
+  [x: string]: any;
   id: string;
   firstName: string;
   lastName: string;

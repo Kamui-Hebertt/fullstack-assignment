@@ -5,6 +5,13 @@ import "./agentForm.css";
 
 const AgentForm: FC = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false);
+  const [error2, setError2] = useState<boolean>(false);
+
+  const [error3, setError3] = useState<boolean>(false);
+
+  const [error4, setError4] = useState<boolean>(false);
+  const [sucess, setSucess] = useState<boolean>(false);
+
   type Form = {
     firstName: string;
     lastName: string;
@@ -37,10 +44,11 @@ const AgentForm: FC = (): JSX.Element => {
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    const reader = new FileReader();
     if (file) {
       setAgentData((prevState) => ({
         ...prevState,
-        photoUrl: null,
+        photoUrl: agentData.photoUrl,
       }));
     }
   };
@@ -53,50 +61,58 @@ const AgentForm: FC = (): JSX.Element => {
 
   const checklastName = () => {
     if (agentData.lastName.trim().length <= 1) {
-      setError(true);
+      setError2(true);
       return alert("Enter a valid last name");
     }
   };
   const checkArea = () => {
-    if (agentData.lastName.trim().length === 0) {
-      setError(true);
+    if (agentData.practiceAreas.trim().length <= 1) {
+      setError3(true);
       return alert("Enter a pratice area");
     }
   };
 
   const checkAgentLicense = () => {
-    if (agentData.lastName.trim().length === 0) {
-      setError(true);
-      return alert("Enter a pratice area");
+    if (agentData.agentLicence.trim().length <= 1 ) {
+      setError4(true);
+      return alert("Enter a valid agent license area");
     }
   };
 
+
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  
     checkName();
     checklastName();
     checkArea();
     checkAgentLicense();
-    if (error) {
-      return "error";
-    }
-    try {
-      const response = await axios.post("/agents", agentData);
-      console.log(response.data);
-      // return response;
-      setAgentData({
-        firstName: "",
-        lastName: "",
-        photoUrl: "",
-        agentLicence: "",
-        address: "",
-        practiceAreas: "",
-        aboutMe: "",
-      });
-    } catch (error) {
-      console.error(error);
+  
+    if (!error || !error2 || !error3 || !error4) {
+      try {
+        const response = await axios.post("/agents", agentData);
+        setSucess(true);
+        console.log(response.data);
+        
+        setAgentData({
+          firstName: "",
+          lastName: "",
+          photoUrl: "",
+          agentLicence: "",
+          address: "",
+          practiceAreas: "",
+          aboutMe: "",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setSucess(false);
     }
   };
-
+  
+  
   return (
     <div className="form">
       <h2 className="h2Title">Register Agent</h2>
@@ -150,11 +166,13 @@ const AgentForm: FC = (): JSX.Element => {
         />
         <input
           type="file"
-          name="photo"
+          name="photoUrl"
+         
           accept="image/png, image/jpeg"
           onChange={handleImageChange}
         />
         <br />
+        {sucess&& <p className="greenText">informations added successfully</p> }
         <button className="button" type="submit">
           Submit
         </button>

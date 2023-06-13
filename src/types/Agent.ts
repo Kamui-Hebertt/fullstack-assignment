@@ -8,4 +8,5 @@ export interface IAgent {
   address: string;
   practiceAreas: string[];
   aboutMe: string;
+  review?: string
 }

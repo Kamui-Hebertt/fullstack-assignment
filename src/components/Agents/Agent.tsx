@@ -6,19 +6,22 @@ import AgentForm from "../AgentForms/AgentForms";
 import context from "../../context/context";
 
 const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
-  const [expanded, setExpanded] = useState(false);
+ 
   const { searchQuery, setSearchQuery } = useContext(context);
   const [filteredPracticeAreas, setFilteredPracticeAreas] = useState<string[]>([]);
-  const [review, setReview] = useState(""); // New state for the review
+  const [review, setReview] = useState(""); 
 
+// const filtering = agent.practiceAreas;
+// console.log(filtering)
+// const incl = filtering.includes(searchQuery);
+// console.log(incl)
+  
+let filtered2 =    agent.practiceAreas.includes(searchQuery)
+ 
+ console.log(filtered2);
   useEffect(() => {
-    if (Array.isArray(agent.practiceAreas)) {
-      const filtered = agent.practiceAreas.filter((practiceArea) =>
-        practiceArea.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredPracticeAreas(filtered);
-    }
-  }, [searchQuery, agent.practiceAreas]);
+
+  }, [searchQuery, agent.practiceAreas, agent.review]);
 
   const shouldRenderAgent = searchQuery === "" || filteredPracticeAreas.includes(agent.practiceArea);
 
@@ -26,12 +29,18 @@ const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
     setReview(event.target.value);
   };
 
-  const handleReviewSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // You can perform any additional logic here, like submitting the review to a server
-    console.log("Review submitted:", review);
+  const handleReviewSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    
+    try {
+      const response = await axios.put(`/agents/${agent.id}`, { review });
+      console.log(response.data);
+   
+      setReview("");
+    } catch (error) {
+      console.error(error);
+    }
   };
-
+console.log(agent)
   return shouldRenderAgent ? (
     <div className="container">
       <header>
@@ -52,12 +61,16 @@ const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
               <span>Areas of Practice: {agent.practiceAreas}</span>
             </div>
           </div>
+          <div>
+            <h4>Reviews</h4>
+            <div>{agent.review}</div>
+          </div>
         </footer>
       </details>
       <div className="review-section">
         <h3>Leave a Review</h3>
         <form className="formRev" onSubmit={handleReviewSubmit}>
-          <textarea value={review} onChange={handleReviewChange} placeholder="Write your review" />
+          <textarea className="text" value={review} onChange={handleReviewChange} placeholder="Write your review" />
           <button type="submit">Submit</button>
         </form>
       </div>

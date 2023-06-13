@@ -1,55 +1,58 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.sqlite3'
+  dialect: "sqlite",
+  storage: "./database.sqlite3",
 });
 
-class Agents extends Sequelize.Model { }
+class Agents extends Sequelize.Model {}
 Agents.init(
   {
     // attributes
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     firstName: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     lastName: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     photoUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     agentLicence: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     address: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     practiceAreas: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     aboutMe: {
-      type: Sequelize.TEXT
-    }, 
-   
+      type: Sequelize.TEXT,
+    },
+    review: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize,
-    modelName: 'Agents',
-    tableName: 'agents',
+    modelName: "Agents",
+    tableName: "agents",
     // options
   }
 );
 
 module.exports = {
   sequelize,
-  Agents
+  Agents,
 };

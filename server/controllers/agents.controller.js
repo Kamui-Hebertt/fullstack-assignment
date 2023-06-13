@@ -11,8 +11,7 @@ class AgentsController {
         address,
         practiceAreas,
         aboutMe,
-   
-     
+        review 
       } = req.body;
   
       const agent = await Agents.create({
@@ -23,8 +22,7 @@ class AgentsController {
         address,
         practiceAreas,
         aboutMe,
-        
-        
+        review,
       });
   
       res.status(201).json(agent);
@@ -32,6 +30,7 @@ class AgentsController {
       res.status(500).json({ error: error.message });
     }
   }
+
 
   async getAllAgents(_req, res) {
     try {
@@ -84,4 +83,6 @@ class AgentsController {
   }
 }
 
+
+ 
 module.exports = AgentsController;

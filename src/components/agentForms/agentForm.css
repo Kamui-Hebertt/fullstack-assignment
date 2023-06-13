@@ -50,3 +50,10 @@
   cursor:pointer;
   opacity:0.5;
 }
+
+
+.greenText {
+  color: #4caf50;
+  display: flex;
+  justify-content: center;
+}

@@ -14,6 +14,7 @@ class AgentsRouter {
     this.router.get('/:id', this.agentsController.getAgentById);
     this.router.put('/:id', this.agentsController.updateAgent);
     this.router.delete('/:id', this.agentsController.deleteAgent);
+   
   }
 
   getRouter() {
@@ -22,3 +23,4 @@ class AgentsRouter {
 }
 
 module.exports = AgentsRouter;
+

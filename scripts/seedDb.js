@@ -1,4 +1,4 @@
-const { Agent } = require('../server/model')
+const { Agents } = require('../server/models/agents.model')
 
 
 /* NOTE: THIS WILL DROP THE CURRENT DATABASE */
@@ -6,11 +6,11 @@ seed();
 
 async function seed() {
   /* Create the table for the agents */
-  await Agent.sync({ force: true })
+  await Agents.sync({ force: true })
 
   /* Insert the data */
   await Promise.all([
-    Agent.create({
+    Agents.create({
       firstName: 'Anton',
       lastName: 'Huot',
       photoUrl: 'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
@@ -19,7 +19,7 @@ async function seed() {
       practiceAreas: ['Los Angeles', 'San Diego', 'New York', 'Miami'].join(','),
       aboutMe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum vitae sapien pellentesque habitant morbi tristique. Dui accumsan sit amet nulla facilisi morbi tempus. Fringilla urna porttitor rhoncus dolor purus non. Vitae et leo duis ut diam quam. Eget nunc scelerisque viverra mauris. Sed velit dignissim sodales ut eu. Vitae sapien pellentesque habitant morbi tristique senectus et netus. Vitae proin sagittis nisl rhoncus mattis. Pellentesque adipiscing commodo elit at imperdiet dui accumsan. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Nunc non blandit massa enim. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent.'
     }),
-    Agent.create({
+    Agents.create({
       firstName: 'Matthew',
       lastName: 'Wiebe',
       photoUrl: 'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
@@ -28,7 +28,7 @@ async function seed() {
       practiceAreas: ['San Diego'].join(','),
       aboutMe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum vitae sapien pellentesque habitant morbi tristique. Dui accumsan sit amet nulla facilisi morbi tempus. Fringilla urna porttitor rhoncus dolor purus non. Vitae et leo duis ut diam quam. Eget nunc scelerisque viverra mauris. Sed velit dignissim sodales ut eu. Vitae sapien pellentesque habitant morbi tristique senectus et netus. Vitae proin sagittis nisl rhoncus mattis. Pellentesque adipiscing commodo elit at imperdiet dui accumsan. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Nunc non blandit massa enim. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent.'
     }),
-    Agent.create({
+    Agents.create({
       firstName: 'Cayton',
       lastName: 'Heath',
       photoUrl: 'https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk',
@@ -37,7 +37,7 @@ async function seed() {
       practiceAreas: ['Miami', 'New York'].join(','),
       aboutMe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum vitae sapien pellentesque habitant morbi tristique. Dui accumsan sit amet nulla facilisi morbi tempus. Fringilla urna porttitor rhoncus dolor purus non. Vitae et leo duis ut diam quam. Eget nunc scelerisque viverra mauris. Sed velit dignissim sodales ut eu. Vitae sapien pellentesque habitant morbi tristique senectus et netus. Vitae proin sagittis nisl rhoncus mattis. Pellentesque adipiscing commodo elit at imperdiet dui accumsan. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Nunc non blandit massa enim. Risus nec feugiat in fermentum posuere urna nec tincidunt praesent.'
     }),
-    Agent.create({
+    Agents.create({
       firstName: 'Jordan',
       lastName: 'McQueen',
       agentLicence: '123321890',

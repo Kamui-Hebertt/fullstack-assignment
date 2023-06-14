@@ -1,6 +1,6 @@
 .container {
   margin: 2rem;
-  background-color: white;
+  background-color: rgb(124, 188, 231);
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(79, 82, 177, 0.35);
   display: inline-flex;
@@ -16,11 +16,11 @@
 }
 
 .avatar {
-  border-radius: 50%;
-  vertical-align: middle;
+   border-radius: 50%;
+   vertical-align: middle; 
   width: 128px;
   height: 128px;
-  display: inline-block;
+  display: inline-block; 
 }
 
 .title {
@@ -47,7 +47,7 @@
   padding: 0 32px;
 }
 
-/* footer {
+footer {
   background: #9442ff;
   border-radius: 0 0 8px 8px;
   color: white;
@@ -55,7 +55,7 @@
   flex-direction: column;
   height: 122px;
   justify-content: center;
-} */
+}
 
 footer .stat {
   font-family: museo-slab, sans-serif;
@@ -81,6 +81,9 @@ footer .stat {
   flex-direction: column;
   width: 100%;
 }
+ .summary{
+  font-family: 'Times New Roman', Times, serif;
+ }
 .summary:hover {
 cursor:pointer;
 }

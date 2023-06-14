@@ -2,7 +2,7 @@ import { useState, FC, useContext, useEffect } from "react";
 import { IAgent } from "../../types/Agent";
 import "./Agent.css";
 import axios from "axios";
-import AgentForm from "../AgentForms/AgentForms";
+
 import context from "../../context/context";
 
 const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
@@ -11,14 +11,8 @@ const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
   const [filteredPracticeAreas, setFilteredPracticeAreas] = useState<string[]>([]);
   const [review, setReview] = useState(""); 
 
-// const filtering = agent.practiceAreas;
-// console.log(filtering)
-// const incl = filtering.includes(searchQuery);
-// console.log(incl)
-  
-let filtered2 =    agent.practiceAreas.includes(searchQuery)
- 
- console.log(filtered2);
+
+
   useEffect(() => {
 
   }, [searchQuery, agent.practiceAreas, agent.review]);

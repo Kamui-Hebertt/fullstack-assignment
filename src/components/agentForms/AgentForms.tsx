@@ -12,6 +12,8 @@ const AgentForm: FC = (): JSX.Element => {
   const [error4, setError4] = useState<boolean>(false);
   const [sucess, setSucess] = useState<boolean>(false);
 
+
+
   type Form = {
     firstName: string;
     lastName: string;
@@ -21,6 +23,8 @@ const AgentForm: FC = (): JSX.Element => {
     practiceAreas: string;
     aboutMe: string;
   };
+
+
 
   const [agentData, setAgentData] = useState<Form>({
     firstName: "",
@@ -44,12 +48,15 @@ const AgentForm: FC = (): JSX.Element => {
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    const reader = new FileReader();
     if (file) {
-      setAgentData((prevState) => ({
-        ...prevState,
-        photoUrl: agentData.photoUrl,
-      }));
+      const reader = new FileReader();
+      reader.onload = () => {
+        setAgentData((prevState) => ({
+          ...prevState,
+          photoUrl: reader.result as string,
+        }));
+      };
+      reader.readAsDataURL(file);
     }
   };
   const checkName = () => {
@@ -82,8 +89,8 @@ const AgentForm: FC = (): JSX.Element => {
 
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
   
+  e.preventDefault()
     checkName();
     checklastName();
     checkArea();
@@ -182,3 +189,7 @@ const AgentForm: FC = (): JSX.Element => {
 };
 
 export default AgentForm;
+function useEffect(arg0: () => void) {
+  throw new Error("Function not implemented.");
+}
+

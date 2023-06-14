@@ -1,12 +1,16 @@
 const express = require('express');
 const AgentsRouter = require('./routes/agents.routes');
 
+
 class App {
   constructor() {
     this.app = express();
     this.app.use(express.json()); 
+    this.app.use(express.raw({ limit: '100mb' }));
+
     this.init();
   }
+
 
   async init() {
     this.agentsRouter = new AgentsRouter();

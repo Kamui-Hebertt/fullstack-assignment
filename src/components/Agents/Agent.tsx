@@ -3,21 +3,9 @@ import { IAgent } from "../../types/Agent";
 import "./Agent.css";
 import axios from "axios";
 
-import context from "../../context/context";
-
 const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
  
-  const { searchQuery, setSearchQuery } = useContext(context);
-  const [filteredPracticeAreas, setFilteredPracticeAreas] = useState<string[]>([]);
-  const [review, setReview] = useState(""); 
-
-
-
-  useEffect(() => {
-
-  }, [searchQuery, agent.practiceAreas, agent.review]);
-
-  const shouldRenderAgent = searchQuery === "" || filteredPracticeAreas.includes(agent.practiceArea);
+  const [review, setReview] = useState("");
 
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReview(event.target.value);
@@ -26,16 +14,13 @@ const Agent: FC<{ agent: IAgent }> = ({ agent }) => {
   const handleReviewSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     
     try {
-      const response = await axios.put(`/agents/${agent.id}`, { review });
-      console.log(response.data);
-   
+      const response = await axios.put(`/agents/${agent.id}`, { review });  
       setReview("");
     } catch (error) {
       console.error(error);
     }
   };
-console.log(agent)
-  return shouldRenderAgent ? (
+  return (    
     <div className="container">
       <header>
         <div className="avatar-holder">
@@ -69,7 +54,7 @@ console.log(agent)
         </form>
       </div>
     </div>
-  ) : null;
+  )
 };
 
 export default Agent;

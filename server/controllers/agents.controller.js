@@ -1,4 +1,5 @@
 const { Agents } = require("../models/agents.model");
+const { Op } = require('sequelize');
 
 class AgentsController {
   async createAgent(req, res) {
@@ -31,10 +32,25 @@ class AgentsController {
     }
   }
 
-
-  async getAllAgents(_req, res) {
+  async getAllAgents(req, res) {
     try {
-      const agents = await Agents.findAll();
+      const filters = req.query;
+      const { practiceAreas } = filters;
+
+      let agents;
+      if (practiceAreas) {
+        agents = await Agents.findAll({
+          where: {
+            practiceAreas: {
+              [Op.like]: `%${practiceAreas}%`,
+            },
+          },
+        });
+      } else {
+        agents = await Agents.findAll();
+      }
+
+      console.log(agents)
       res.status(200).json(agents);
     } catch (error) {
       res.status(500).json({ error: error.message });

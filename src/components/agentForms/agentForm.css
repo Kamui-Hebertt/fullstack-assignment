@@ -23,13 +23,6 @@
   gap: 1.2rem;
 }
 
-/* .agent-form input,
-.agent-form textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-} */
 
 .agent-form input[type="file"] {
   padding: 0;
@@ -56,4 +49,8 @@
   color: #4caf50;
   display: flex;
   justify-content: center;
+}
+
+.redText {
+  color:red;
 }

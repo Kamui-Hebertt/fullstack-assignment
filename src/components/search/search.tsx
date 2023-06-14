@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FC, useContext } from "react";
+import React, {  ChangeEvent, FC, useContext } from "react";
 import * as M from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Search.css";

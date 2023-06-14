@@ -6,7 +6,7 @@ class App {
   constructor() {
     this.app = express();
     this.app.use(express.json()); 
-    this.app.use(express.raw({ limit: '100mb' }));
+    this.app.use(express.raw({ limit: '200mb' }));
 
     this.init();
   }

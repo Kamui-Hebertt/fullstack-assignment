@@ -6,13 +6,11 @@ import "./agentForm.css";
 const AgentForm: FC = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false);
   const [error2, setError2] = useState<boolean>(false);
-
   const [error3, setError3] = useState<boolean>(false);
-
   const [error4, setError4] = useState<boolean>(false);
   const [sucess, setSucess] = useState<boolean>(false);
-
-
+  
+  const [somethingWrong, setSomethingWrong] = useState(false);
 
   type Form = {
     firstName: string;
@@ -23,8 +21,6 @@ const AgentForm: FC = (): JSX.Element => {
     practiceAreas: string;
     aboutMe: string;
   };
-
-
 
   const [agentData, setAgentData] = useState<Form>({
     firstName: "",
@@ -62,64 +58,59 @@ const AgentForm: FC = (): JSX.Element => {
   const checkName = () => {
     if (agentData.firstName.trim().length <= 1) {
       setError(true);
-      return alert("Enter a valid name");
+      throw new Error("Parameter is not a number!");
     }
   };
 
   const checklastName = () => {
     if (agentData.lastName.trim().length <= 1) {
       setError2(true);
-      return alert("Enter a valid last name");
+      throw new Error("last name must be valid!");
     }
   };
   const checkArea = () => {
     if (agentData.practiceAreas.trim().length <= 1) {
       setError3(true);
-      return alert("Enter a pratice area");
+      throw new Error("pratice areas must be valid!");
     }
   };
 
   const checkAgentLicense = () => {
-    if (agentData.agentLicence.trim().length <= 1 ) {
+    if (agentData.agentLicence.trim().length <= 1) {
       setError4(true);
-      return alert("Enter a valid agent license area");
+      throw new Error("agent Lincense must be valid!");
     }
   };
 
-
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  
-  e.preventDefault()
+    e.preventDefault();
+
     checkName();
     checklastName();
     checkArea();
     checkAgentLicense();
-  
-    if (!error || !error2 || !error3 || !error4) {
-      try {
-        const response = await axios.post("/agents", agentData);
-        setSucess(true);
-        console.log(response.data);
-        
-        setAgentData({
-          firstName: "",
-          lastName: "",
-          photoUrl: "",
-          agentLicence: "",
-          address: "",
-          practiceAreas: "",
-          aboutMe: "",
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      setSucess(false);
+
+    try {
+      const response = await axios.post("/agents", agentData);
+      setSucess(true);
+      console.log(response.data);
+
+      setAgentData({
+        firstName: "",
+        lastName: "",
+        photoUrl: "",
+        agentLicence: "",
+        address: "",
+        practiceAreas: "",
+        aboutMe: "",
+      });
+    } catch (error) {
+      console.error(error);
+      console.log("image too large");
+      setSomethingWrong(true);
     }
   };
-  
-  
+
   return (
     <div className="form">
       <h2 className="h2Title">Register Agent</h2>
@@ -174,12 +165,20 @@ const AgentForm: FC = (): JSX.Element => {
         <input
           type="file"
           name="photoUrl"
-         
-          accept="image/png, image/jpeg"
+          accept=".png, .jpg, .jpeg, image/png, image/jpeg"
           onChange={handleImageChange}
         />
         <br />
-        {sucess&& <p className="greenText">informations added successfully</p> }
+        {somethingWrong && (
+          <p className="redText">
+            Something went wrong, try other image or none
+          </p>
+        )}
+        {error && <p className="redText">First name is is required</p>}
+        {error2 && <p className="redText">Last name is is required</p>}
+        {error3 && <p className="redText">Agente Linsence is is required</p>}
+        {error4 && <p className="redText">Practice Areas is is required</p>}
+        {sucess && <p className="greenText">informations added successfully</p>}
         <button className="button" type="submit">
           Submit
         </button>
@@ -189,7 +188,3 @@ const AgentForm: FC = (): JSX.Element => {
 };
 
 export default AgentForm;
-function useEffect(arg0: () => void) {
-  throw new Error("Function not implemented.");
-}
-
